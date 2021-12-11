@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1179,3235" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1179,3219" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="29">
       <x:String>System.Activities</x:String>
@@ -56,17 +56,18 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="762,3170" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap:VirtualizedContainerService.HintSize="660,3154" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="numMessages" />
       <Variable x:TypeArguments="x:Boolean" Name="isRunning" />
+      <Variable x:TypeArguments="x:String" Name="messageToSend" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="720,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign sap:VirtualizedContainerService.HintSize="618,60" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Boolean">[isRunning]</OutArgument>
       </Assign.To>
@@ -74,28 +75,32 @@
         <InArgument x:TypeArguments="x:Boolean">True</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InterruptibleWhile DisplayName="While" sap:VirtualizedContainerService.HintSize="720,2978" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="618,238" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="What is the message?" Title="Messages">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[messageToSend]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <ui:InterruptibleWhile Condition="[isRunning]" DisplayName="While" sap:VirtualizedContainerService.HintSize="618,2684" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
       <ui:InterruptibleWhile.Body>
-        <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="684,2813" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
+        <ui:TriggerScope DisplayName="Trigger Scope" sap:VirtualizedContainerService.HintSize="582,2519" sap2010:WorkflowViewState.IdRef="TriggerScope_1" SchedulingMode="Sequential">
           <ui:TriggerScope.Action>
             <ActivityAction x:TypeArguments="ui:EventInfoTriggerArgs">
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="ui:EventInfoTriggerArgs" Name="args" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Trigger Sequence" sap:VirtualizedContainerService.HintSize="632,2499" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <Sequence DisplayName="Trigger Sequence" sap:VirtualizedContainerService.HintSize="530,2205" sap2010:WorkflowViewState.IdRef="Sequence_7">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="590,84" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[&quot;test&quot;]" />
-                <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe  (1) LinkedIn'" sap:VirtualizedContainerService.HintSize="590,2283" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="2df63d2f4750129c78c09d90db5bebd7" Selector="&lt;html app='chrome.exe' title='*LinkedIn*' /&gt;">
+                <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe  (1) LinkedIn'" sap:VirtualizedContainerService.HintSize="488,2113" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="2df63d2f4750129c78c09d90db5bebd7" Selector="&lt;html app='chrome.exe' title='*LinkedIn*' /&gt;">
                   <ui:BrowserScope.Body>
                     <ActivityAction x:TypeArguments="x:Object">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="556,2137" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                      <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="454,1967" sap2010:WorkflowViewState.IdRef="Sequence_2">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:Int32" Name="counter" />
                         </Sequence.Variables>
@@ -104,12 +109,12 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="514,238" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="How many messages would you like to send out?" Title="Messages">
+                        <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="412,238" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="How many messages would you like to send out?" Title="Messages">
                           <ui:InputDialog.Result>
                             <OutArgument x:TypeArguments="x:Int32">[numMessages]</OutArgument>
                           </ui:InputDialog.Result>
                         </ui:InputDialog>
-                        <Assign sap:VirtualizedContainerService.HintSize="514,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                        <Assign sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_3">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Int32">[numMessages]</OutArgument>
                           </Assign.To>
@@ -117,7 +122,7 @@
                             <InArgument x:TypeArguments="x:Int32">[numMessages+1]</InArgument>
                           </Assign.Value>
                         </Assign>
-                        <Assign sap:VirtualizedContainerService.HintSize="514,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                        <Assign sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_1">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
                           </Assign.To>
@@ -125,9 +130,9 @@
                             <InArgument x:TypeArguments="x:Int32">1</InArgument>
                           </Assign.Value>
                         </Assign>
-                        <ui:InterruptibleWhile DisplayName="While" sap:VirtualizedContainerService.HintSize="514,1567" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+                        <ui:InterruptibleWhile Condition="[counter &lt; numMessages]" DisplayName="While" sap:VirtualizedContainerService.HintSize="412,1397" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
                           <ui:InterruptibleWhile.Body>
-                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="478,1402" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,1232" sap2010:WorkflowViewState.IdRef="Sequence_3">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="x:String" Name="messageName" />
                                 <Variable x:TypeArguments="x:String" Name="messageStr" />
@@ -137,7 +142,7 @@
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                 </scg:Dictionary>
                               </sap:WorkflowViewStateService.ViewState>
-                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'SPAN'" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'SPAN'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
                                 <ui:Click.CursorPosition>
                                   <ui:CursorPosition Position="Center">
                                     <ui:CursorPosition.OffsetX>
@@ -159,7 +164,7 @@
                                   </ui:Target>
                                 </ui:Click.Target>
                               </ui:Click>
-                              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'SPAN'" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
+                              <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text 'SPAN'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
                                 <ui:GetValue.Target>
                                   <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="33b8e89b-6a65-48a5-8209-97c776d61ae3" InformativeScreenshot="f78e54eab34304fb5a22e54c0ccf00ac" Selector="&lt;webctrl tag='BUTTON' type='button' idx='*' /&gt;&lt;webctrl parentid='ember*' tag='SPAN' class='artdeco-pill__text' isleaf='1' /&gt;">
                                     <ui:Target.TimeoutMS>
@@ -174,7 +179,7 @@
                                   <OutArgument x:TypeArguments="x:String">[messageName]</OutArgument>
                                 </ui:GetValue.Value>
                               </ui:GetValue>
-                              <Assign sap:VirtualizedContainerService.HintSize="436,60" sap2010:WorkflowViewState.IdRef="Assign_6">
+                              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_6">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:String">[messageStr]</OutArgument>
                                 </Assign.To>
@@ -182,7 +187,7 @@
                                   <InArgument x:TypeArguments="x:String">["Hello " + messageName + " Testing this is a test message from RuntimeReady"]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Into" sap:VirtualizedContainerService.HintSize="436,96" sap2010:WorkflowViewState.IdRef="TypeInto_1" SimulateType="False" Text="[&quot;Hello, &quot; + messageName]">
+                              <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Into" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_1" SimulateType="False" Text="[&quot;Hello, &quot; + messageName]">
                                 <ui:TypeInto.Target>
                                   <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3c856056-1874-41c1-9593-0bdbfa8f4a39" Selector="&lt;webctrl aria-role='textbox' tag='DIV' aria-label='Write a message…' /&gt;&lt;webctrl tag='P' /&gt;">
                                     <ui:Target.TimeoutMS>
@@ -194,7 +199,7 @@
                                   </ui:Target>
                                 </ui:TypeInto.Target>
                               </ui:TypeInto>
-                              <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Into" sap:VirtualizedContainerService.HintSize="436,96" sap2010:WorkflowViewState.IdRef="TypeInto_2" SimulateType="False" Text="Testing this is a test message from RuntimeReady">
+                              <ui:TypeInto AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" ClickBeforeTyping="True" DisplayName="Type Into" sap:VirtualizedContainerService.HintSize="334,96" sap2010:WorkflowViewState.IdRef="TypeInto_2" SimulateType="False" Text="[messageToSend]">
                                 <ui:TypeInto.Target>
                                   <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3c856056-1874-41c1-9593-0bdbfa8f4a39" Selector="&lt;webctrl aria-role='textbox' tag='DIV' aria-label='Write a message…' /&gt;&lt;webctrl tag='P' /&gt;">
                                     <ui:Target.TimeoutMS>
@@ -206,40 +211,29 @@
                                   </ui:Target>
                                 </ui:TypeInto.Target>
                               </ui:TypeInto>
-                              <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,276" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-                                <ui:CommentOut.Body>
-                                  <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,198" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                                    <sap:WorkflowViewStateService.ViewState>
-                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      </scg:Dictionary>
-                                    </sap:WorkflowViewStateService.ViewState>
-                                    <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
-                                      <ui:Click.CursorPosition>
-                                        <ui:CursorPosition Position="Center">
-                                          <ui:CursorPosition.OffsetX>
-                                            <InArgument x:TypeArguments="x:Int32" />
-                                          </ui:CursorPosition.OffsetX>
-                                          <ui:CursorPosition.OffsetY>
-                                            <InArgument x:TypeArguments="x:Int32" />
-                                          </ui:CursorPosition.OffsetY>
-                                        </ui:CursorPosition>
-                                      </ui:Click.CursorPosition>
-                                      <ui:Click.Target>
-                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5fd3e94c-d250-469b-89a9-8f2da8824730" InformativeScreenshot="34d2ad391395e73cebaee56224875fe2" Selector="&lt;webctrl tag='BUTTON' type='submit' /&gt;">
-                                          <ui:Target.TimeoutMS>
-                                            <InArgument x:TypeArguments="x:Int32" />
-                                          </ui:Target.TimeoutMS>
-                                          <ui:Target.WaitForReady>
-                                            <InArgument x:TypeArguments="ui:WaitForReady" />
-                                          </ui:Target.WaitForReady>
-                                        </ui:Target>
-                                      </ui:Click.Target>
-                                    </ui:Click>
-                                  </Sequence>
-                                </ui:CommentOut.Body>
-                              </ui:CommentOut>
-                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'SVG'" sap:VirtualizedContainerService.HintSize="436,106" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'BUTTON'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                <ui:Click.CursorPosition>
+                                  <ui:CursorPosition Position="Center">
+                                    <ui:CursorPosition.OffsetX>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:CursorPosition.OffsetX>
+                                    <ui:CursorPosition.OffsetY>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:CursorPosition.OffsetY>
+                                  </ui:CursorPosition>
+                                </ui:Click.CursorPosition>
+                                <ui:Click.Target>
+                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5fd3e94c-d250-469b-89a9-8f2da8824730" InformativeScreenshot="34d2ad391395e73cebaee56224875fe2" Selector="&lt;webctrl tag='BUTTON' type='submit' /&gt;">
+                                    <ui:Target.TimeoutMS>
+                                      <InArgument x:TypeArguments="x:Int32" />
+                                    </ui:Target.TimeoutMS>
+                                    <ui:Target.WaitForReady>
+                                      <InArgument x:TypeArguments="ui:WaitForReady" />
+                                    </ui:Target.WaitForReady>
+                                  </ui:Target>
+                                </ui:Click.Target>
+                              </ui:Click>
+                              <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'SVG'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
                                 <ui:Click.CursorPosition>
                                   <ui:CursorPosition Position="Center">
                                     <ui:CursorPosition.OffsetX>
@@ -261,7 +255,7 @@
                                   </ui:Target>
                                 </ui:Click.Target>
                               </ui:Click>
-                              <Assign sap:VirtualizedContainerService.HintSize="436,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                              <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
                                 <Assign.To>
                                   <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
                                 </Assign.To>
@@ -269,12 +263,9 @@
                                   <InArgument x:TypeArguments="x:Int32">[counter + 1]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="436,84" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Message sent&quot;]" />
+                              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,84" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Message sent&quot;]" />
                             </Sequence>
                           </ui:InterruptibleWhile.Body>
-                          <ui:InterruptibleWhile.Condition>
-                            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="counter &lt; numMessages" />
-                          </ui:InterruptibleWhile.Condition>
                         </ui:InterruptibleWhile>
                       </Sequence>
                     </ActivityAction>
@@ -285,14 +276,11 @@
           </ui:TriggerScope.Action>
           <ui:TriggerScope.Triggers>
             <scg:List x:TypeArguments="Activity" Capacity="4">
-              <ui:HotkeyTriggerV2 BlockEvent="False" DisplayName="Hotkey Trigger" sap:VirtualizedContainerService.HintSize="648,84" sap2010:WorkflowViewState.IdRef="HotkeyTriggerV2_1" Key="m" KeyModifiers="Alt, Ctrl" UseWindowsHotKey="False" />
+              <ui:HotkeyTriggerV2 BlockEvent="False" DisplayName="Hotkey Trigger" sap:VirtualizedContainerService.HintSize="546,84" sap2010:WorkflowViewState.IdRef="HotkeyTriggerV2_1" Key="m" KeyModifiers="Alt, Ctrl" UseWindowsHotKey="False" />
             </scg:List>
           </ui:TriggerScope.Triggers>
         </ui:TriggerScope>
       </ui:InterruptibleWhile.Body>
-      <ui:InterruptibleWhile.Condition>
-        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="isRunning" />
-      </ui:InterruptibleWhile.Condition>
     </ui:InterruptibleWhile>
   </Sequence>
 </Activity>
